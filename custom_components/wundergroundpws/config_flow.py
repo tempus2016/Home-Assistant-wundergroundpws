@@ -55,7 +55,7 @@ class WundergrounPWSFlowHandler(config_entries.ConfigFlow, domain=DOMAIN):
                 errors["base"] = "invalid_station_id"
                 raise InvalidStationId
 
-            with async_timeout.timeout(DEFAULT_TIMEOUT):
+            async with async_timeout.timeout(DEFAULT_TIMEOUT):
                 url = f'https://api.weather.com/v2/pws/observations/current?stationId={pws_id}&format=json&units=e' \
                       f'&apiKey={api_key}'
                 response = await session.get(url, headers=headers)
